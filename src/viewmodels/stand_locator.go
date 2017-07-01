@@ -1,5 +1,7 @@
 package viewmodels
 
+import ()
+
 type standLocator struct {
 	Title  string
 	Active string
@@ -83,6 +85,6 @@ func GetStandLocations() []standLocation {
 			Title: "Carson's stand",
 		},
 	}
-
+	
 	return result
 }

@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"controllers/util"
 	"net/http"
-	"text/template"
 	"viewmodels"
+	"text/template"
+	"controllers/util"
 )
 
 type homeController struct {
@@ -13,10 +13,10 @@ type homeController struct {
 
 func (this *homeController) get(w http.ResponseWriter, req *http.Request) {
 	vm := viewmodels.GetHome()
-
+	
 	w.Header().Add("Content-Type", "text/html")
 	responseWriter := util.GetResponseWriter(w, req)
 	defer responseWriter.Close()
-
+	
 	this.template.Execute(responseWriter, vm)
 }

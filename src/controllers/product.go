@@ -7,6 +7,8 @@ import (
 	"viewmodels"
 	"strconv"
 	"controllers/util"
+	"models"
+	"converters"
 )
 
 type productController struct {
@@ -20,12 +22,19 @@ func (this *productController) get(w http.ResponseWriter, req *http.Request) {
 	
 	id, err := strconv.Atoi(idRaw)
 	if err == nil {
-		vm := viewmodels.GetProduct(id)
-		w.Header().Add("Content-Type", "text/html")
-		responseWriter := util.GetResponseWriter(w, req)
-		defer responseWriter.Close()
+		product, err := models.GetProductById(id)
 		
-		this.template.Execute(responseWriter, vm)
+		if err == nil {
+			
+			w.Header().Add("Content-Type", "text/html")
+			responseWriter := util.GetResponseWriter(w, req)
+			defer responseWriter.Close()
+		
+			vm := viewmodels.GetProduct(product.Name())
+			vm.Product = converters.ConvertProductToViewModel(product)
+			
+			this.template.Execute(responseWriter, vm)
+		}
 	} else {
 		w.WriteHeader(404)
 	}

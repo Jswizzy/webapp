@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="columns small-8 small-offset-2" id="map-canvas"></div>
 				<script type="text/javascript"
-					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn3bDFB1WuBnG2zgMJtGBvg3FgnOYwpJ0">
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7ZIGyruPFDfhdWLPpmvyTQz_JpImnaDI">
 
 				</script>
 				<script type="text/javascript">
@@ -37,7 +37,7 @@
 									var xhr = new XMLHttpRequest();
 									xhr.addEventListener("readystatechange", function() {
 										if (xhr.readyState == 4) {
-											var coords = JSON.parse(xhr.responseText);
+											var coords = eval(xhr.responseText);
 											coords.forEach(function(coord) {
 												var marker = new google.maps.Marker({
 													position : new google.maps.LatLng(
